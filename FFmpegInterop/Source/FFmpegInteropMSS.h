@@ -96,6 +96,7 @@ namespace FFmpegInterop
 		HRESULT CreateMediaStreamSource(String^ uri, bool forceAudioDecode, bool forceVideoDecode, PropertySet^ ffmpegOptions);
 		HRESULT InitFFmpegContext(bool forceAudioDecode, bool forceVideoDecode);
 		HRESULT CreateAudioStreamDescriptor(bool forceAudioDecode);
+		HRESULT CreateAudioStreamDescriptorFromParameters(AVCodecParameters* avCodecParams);
 		HRESULT CreateVideoStreamDescriptor(bool forceVideoDecode);
 		HRESULT ConvertCodecName(const char* codecName, String^ *outputCodecName);
 		HRESULT ParseOptions(PropertySet^ ffmpegOptions);
@@ -106,14 +107,14 @@ namespace FFmpegInterop
 		EventRegistrationToken startingRequestedToken;
 		EventRegistrationToken sampleRequestedToken;
 
-		internal:
+	internal:
 		AVDictionary* avDict;
 		AVIOContext* avIOCtx;
 		AVFormatContext* avFormatCtx;
 		AVCodecContext* avAudioCodecCtx;
 		AVCodecContext* avVideoCodecCtx;
 
-		private:
+	private:
 		AudioStreamDescriptor^ audioStreamDescriptor;
 		VideoStreamDescriptor^ videoStreamDescriptor;
 		int audioStreamIndex;
